@@ -25,3 +25,9 @@ export type SocialObjects = {
   active: boolean;
   linkTitle: string;
 }[];
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}

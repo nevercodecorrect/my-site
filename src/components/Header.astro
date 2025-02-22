@@ -4,7 +4,7 @@ import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
 export interface Props {
-  activeNav?: "posts" | "archives" | "tags" | "about" | "search";
+  activeNav?: "posts" | "archives" | "tags" | "about" | "search"| "cv" | "home" | "experience"| "PrivacyPolicy" | "teaching";
 }
 
 const { activeNav } = Astro.props;
@@ -55,7 +55,40 @@ const { activeNav } = Astro.props;
           </svg>
         </button>
         <ul id="menu-items" class="display-none sm:flex">
+
+
+          <!-- <li>
+            <a href="/" class={activeNav === "home" ? "active" : ""}>
+              Home
+            </a>
+          </li> -->
+
           <li>
+            <a href="/cv/" class={activeNav === "cv" ? "active" : ""}>
+              CV
+            </a>
+          </li>
+
+          <li>
+            <a href="/experience/" class={activeNav === "experience" ? "active" : ""}>
+              Experience
+            </a>
+          </li>
+
+          <!-- <li>
+            <a href="/teaching/" class={activeNav === "teaching" ? "active" : ""}>
+              Teaching
+            </a>
+          </li> -->
+
+          <!-- <li>
+            <a href="/PrivacyPolicy/" class={activeNav === "experience" ? "active" : ""}>
+              Privacy Policy
+            </a>
+          </li> -->
+
+
+          <!-- <li>
             <a href="/posts/" class={activeNav === "posts" ? "active" : ""}>
               Posts
             </a>
@@ -104,7 +137,7 @@ const { activeNav } = Astro.props;
                 </LinkButton>
               </li>
             )
-          }
+          } -->
           <li>
             <LinkButton
               href="/search/"

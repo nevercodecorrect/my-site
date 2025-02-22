@@ -1,0 +1,84 @@
+---
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+---
+
+<Layout title="Experience">
+  <Header />
+  <Breadcrumbs />
+  <main id="main-content">
+    <section id="Work">
+      <div>
+        <h2 class="mb-4 text-center font-bold text-2xl">Work</h2>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">Security Engineer</h3>
+          <p><strong>Company:</strong> AWS, New York</p>
+          <p><strong>Year:</strong> Sep 2022 - Sep 2023</p>
+          <p>Developing automatic web vulnerability scanner.</p>
+        </div>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">Research Assistant</h3>
+          <p><strong>Institution:</strong> University of Virginia, Charlottesville</p>
+          <p><strong>Year:</strong> Sep 2019 - May 2022</p>
+          <p>Conducted research in web security and compiler optimization.</p>
+        </div>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">Research Assistant</h3>
+          <p><strong>Institution:</strong> Nanyang Technological University</p>
+          <p><strong>Year:</strong> Dec 2018 - Mar 2019</p>
+          <p>Conducted research in device-free sensing and wireless network.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="Teach">
+      <div>
+        <h2 class="mb-4 text-center font-bold text-2xl">Teaching</h2>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">System Security</h3>
+          <p><strong>Institution:</strong> Universität Hamburg, Hamburg</p>
+          <p><strong>Year:</strong> Sep 2024 - Mar 2025</p>
+        </div>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">System Security</h3>
+          <p><strong>Institution:</strong> Universität des Saarlandes, Saarbrücken</p>
+          <p><strong>Year:</strong> Sep 2023 - Mar 2024</p>
+        </div>
+
+        <div class="experience bg-white p-5 rounded-lg shadow-md mb-5">
+          <h3 class="font-bold text-xl mb-2">Operating System</h3>
+          <p><strong>Institution:</strong> University of Virginia, Charlottesville</p>
+          <p><strong>Year:</strong> Sep 2021 - Mar 2022</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  #main-content {
+    max-width: 768px; /* Tailwind equivalent: max-w-3xl */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .experience {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+</style>

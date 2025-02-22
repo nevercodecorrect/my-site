@@ -23,38 +23,26 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Mingalaba</h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="rss-link"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
-          ><path
-            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
-          ></path><path
-            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
-          ></path><circle cx="6" cy="18" r="2"></circle>
-        </svg>
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      <h1>About me:</h1>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p>
-        Read the blog posts or check
+        Hello! I am Meng Wang, a Ph.D. Candidate in
         <LinkButton
           className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href="https://cispa.de/en"
         >
-          README
-        </LinkButton> for more info.
+          CISPA
+        </LinkButton>
+        Helmholtz Center for Information Security. I am currently supervised by
+        <LinkButton
+          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
+          href="https://ali-abbasi.info/"
+        >
+          Dr. Ali Abbasi
+        </LinkButton>
+        with a focus on system/firmware security. Previously I worked for AWS Proactive
+        Security and contributed to a web vulnerability scanner scanning all the
+        websites owned by AWS.
       </p>
       {
         // only display if at least one social link is enabled
@@ -68,8 +56,145 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     </section>
 
     <Hr />
+    <section id="Publications">
+      <h1 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">
+        Publications
+      </h1>
+      <body>
 
-    {
+        <div class="container">
+          <div
+            class="publication"
+            style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          margin-bottom: 20px;"
+          >
+            <h2 style="font-weight: bold;">
+              <a href="https://www.ndss-symposium.org/wp-content/uploads/2025-526-paper.pdf" target="_blank"
+                >[NDSS 25] TWINFUZZ: Differential Testing of Video Hardware Acceleration Stacks</a>
+            </h2>
+            <p>
+              <strong>Authors:</strong>Matteo Leonelli, Addison Crump, <span
+              style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
+              >Meng Wang</span
+            >, Florian Bauckholt, Keno Hassler, Ali Abbasi, Thorsten Holz
+            </p>
+
+            <p>
+              <strong>Conference:</strong> Network and Distributed System Security
+              (NDSS) Symposium
+            </p>
+          </div>
+
+        <div class="container">
+          <div
+            class="publication"
+            style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          margin-bottom: 20px;"
+          >
+            <h2 style="font-weight: bold;">
+              <a href="https://www.ndss-symposium.org/wp-content/uploads/2025-330-paper.pdf" target="_blank"
+                >[NDSS 25] A Comprehensive Memory Safety Analysis of Bootloaders</a>
+            </h2>
+            <p>
+              <strong>Authors:</strong> Jianqiang Wang , <span
+                style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
+                >Meng Wang</span
+              >, Qinying Wang, Nils Langius, Li Shi, Ali Abbasi, Thorsten Holz
+            </p>
+
+            <p>
+              <strong>Conference:</strong> Network and Distributed System Security
+              (NDSS) Symposium
+            </p>
+          </div>
+
+          <div
+            class="publication"
+            style="
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;"
+          >
+            <h2 style="font-weight: bold;">
+              <a
+                href="https://dl.acm.org/doi/pdf/10.1145/3460120.3484577"
+                target="_blank"
+                >[CCS 21] Spinner: Automated Dynamic Command Subsystem
+                Perturbation</a>
+            </h2>
+            <p>
+              <strong>Authors:</strong>
+              <span
+                style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
+                >Meng Wang</span
+              >, Chijung Jung, Ali Ahad, Yonghwi Kwon
+            </p>
+            <p>
+              <strong>Conference:</strong> Proceedings of the 2021 ACM SIGSAC Conference
+              on Computer and Communications Security
+            </p>
+          </div>
+        </div>
+      </body>
+    </section>
+    
+    
+    <Hr />
+    <section id="Education">
+      <h1 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">
+        Education
+      </h1>
+
+      <div class="education" style="
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;">
+            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Ph.D. in Computer Science</h3>
+            <p><strong>CISPA Helmholtz Center for Information Security</p>
+            <p><strong>Year:</strong> 2023 - now</p>
+        </div>
+        <div class="education" style="
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;">
+            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">M.S. in Computer Science</h3>
+            <p><strong> University of Virginia</p>
+            <p><strong>Year:</strong> 2019 - 2022</p>
+        </div>
+
+        <div class="education" style="
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;">
+            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">B.E. in Network Security</h3>
+            <p><strong> Dalian University of Technology</p>
+            <p><strong>Year:</strong> 2015 - 2019</p>
+        </div>
+
+    </section>  
+    
+    
+    
+    <Hr />
+
+
+    <!-- {
       featuredPosts.length > 0 && (
         <>
           <section id="featured">
@@ -118,7 +243,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           ></path>
         </svg>
       </LinkButton>
-    </div>
+    </div> -->
   </main>
 
   <Footer />
@@ -150,6 +275,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
   /* ===== Featured & Recent Posts Sections ===== */
   #featured,
+  #Publications,
   #recent-posts {
     @apply pb-6 pt-12;
   }
