@@ -248,6 +248,39 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 </Layout>
 
 <style>
+.container, .publication, .education {
+  background: white;
+  color: black; /* Ensures default text color */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styles */
+.dark-mode .container, 
+.dark-mode .publication, 
+.dark-mode .education {
+  background: #1e1e1e;
+  color: white; /* Ensures text is readable */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure links are visible in dark mode */
+.dark-mode a {
+  color: #4da6ff; /* Light blue for contrast */
+}
+
+.dark-mode strong {
+  color: #ffcc66; /* A soft yellow for emphasis */
+}
+
+/* Style for author highlight */
+.dark-mode .highlight-author {
+  background-color: #444; /* Dark gray */
+  color: white;
+}
   /* ===== Hero Section ===== */
   #hero {
     @apply pb-6 pt-8;
