@@ -28,5 +28,4 @@ Your site (https://mengwa.net) is now ready for Google indexing. Here are the st
 - Make sure your site is accessible to the public (which it is, since it's deployed).
 - For faster indexing, share your site on social media or get backlinks.
 - Check Search Console for crawl errors or indexing issues.
-
 **Your site is now fully set up for Google search!**

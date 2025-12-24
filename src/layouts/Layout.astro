@@ -66,16 +66,14 @@ const structuredData = {
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ2J6BS9LE"></script>
 <script>
-  window.dataLayer = (window.dataLayer || []) as any[];
-  function gtag(...args: any[]) {
-    window.dataLayer.push(args);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    // @ts-ignore - gtag injected at runtime
+    dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-RQ2J6BS9LE', {
-    anonymize_ip: true  // Privacy-friendly tracking
-  });
+  gtag('config', 'G-RQ2J6BS9LE', { anonymize_ip: true });
 </script>
-
 
 
     <!-- General Meta Tags -->
