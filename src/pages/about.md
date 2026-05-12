@@ -1,36 +1,25 @@
 ---
 layout: ../layouts/AboutLayout.astro
 title: "About"
+activeNav: "about"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+<figure>
+  <img src="/assets/dev.svg" class="mx-auto max-w-xl" alt="Illustration of software systems and code interfaces">
+  <figcaption>Research at the boundary of software systems, automation, and security analysis.</figcaption>
+</figure>
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+## Research Interests
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+- System and firmware security
+- Fuzzing and automated vulnerability discovery
+- Web security and large-scale vulnerability scanning
+- Memory safety and low-level software analysis
+- Business logic vulnerabilities
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+## Site Sections
 
-## Tech Stack
-
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
-
-## Features
-
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+- [Publications](/publications/): selected peer-reviewed work
+- [Experience](/experience/): research, industry, and education background
+- [Teaching](/teach/): teaching assistantships and course areas
+- [CV](/cv/): concise academic overview

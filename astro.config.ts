@@ -15,7 +15,16 @@ export default defineConfig({
     }),
     react(),
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: page => {
+        const writingPages = ["/archives/", "/posts/", "/search/", "/tags/"];
+        const isWritingPage = writingPages.some(path => page.endsWith(path));
+
+        if (!SITE.showWriting && isWritingPage) {
+          return false;
+        }
+
+        return SITE.showArchives || !page.endsWith("/archives/");
+      },
     }),
   ],
   markdown: {

@@ -1,63 +1,113 @@
 ---
-import { SITE } from "@config";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+
+const workItems = [
+  {
+    role: "Security Engineer",
+    organization: "AWS Proactive Security",
+    location: "New York",
+    period: "Sep 2022 - Sep 2023",
+    description:
+      "Developed automated web vulnerability scanning to assess AWS-owned websites.",
+  },
+  {
+    role: "Research Assistant",
+    organization: "University of Virginia",
+    location: "Charlottesville",
+    period: "Sep 2019 - May 2022",
+    description:
+      "Conducted research in web security and compiler optimization.",
+  },
+  {
+    role: "Research Assistant",
+    organization: "Nanyang Technological University",
+    location: "Singapore",
+    period: "Dec 2018 - Mar 2019",
+    description:
+      "Conducted research in device-free sensing and wireless networks.",
+  },
+] as const;
+
+const educationItems = [
+  {
+    degree: "Ph.D. in Computer Science",
+    institution: "CISPA Helmholtz Center for Information Security",
+    location: "Saarbrücken",
+    period: "2023 - now",
+  },
+  {
+    degree: "M.S. in Computer Science",
+    institution: "University of Virginia",
+    location: "Charlottesville",
+    period: "2019 - 2022",
+  },
+  {
+    degree: "B.E. in Network Security",
+    institution: "Dalian University of Technology",
+    location: "Dalian",
+    period: "2015 - 2019",
+  },
+] as const;
 ---
 
-<Layout title="Experience">
-  <Header />
+<Layout title="Experience | Meng Wang">
+  <Header activeNav="experience" />
   <Breadcrumbs />
   <main id="main-content">
-    <section id="Work">
-      <div>
-        <h2 class="mb-4 text-center font-bold text-2xl">Work</h2>
+    <section class="page-hero">
+      <p class="eyebrow">Academic and industry experience</p>
+      <h1>Experience</h1>
+      <p>
+        Research and engineering work across system security and web security,
+        with academic training in computer science and network security.
+      </p>
+    </section>
 
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">Security Engineer</h3>
-          <p><strong>Company:</strong> AWS, New York</p>
-          <p><strong>Year:</strong> Sep 2022 - Sep 2023</p>
-          <p>Developing automatic web vulnerability scanner.</p>
-        </div>
+    <section class="timeline-section" aria-labelledby="work-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Research / Engineering</p>
+        <h2 id="work-heading">Work</h2>
+      </div>
 
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">Research Assistant</h3>
-          <p><strong>Institution:</strong> University of Virginia, Charlottesville</p>
-          <p><strong>Year:</strong> Sep 2019 - May 2022</p>
-          <p>Conducted research in web security and compiler optimization.</p>
-        </div>
-
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">Research Assistant</h3>
-          <p><strong>Institution:</strong> Nanyang Technological University</p>
-          <p><strong>Year:</strong> Dec 2018 - Mar 2019</p>
-          <p>Conducted research in device-free sensing and wireless network.</p>
-        </div>
+      <div class="timeline">
+        {
+          workItems.map(item => (
+            <article class="timeline-card">
+              <p class="period">{item.period}</p>
+              <h3>{item.role}</h3>
+              <p class="organization">
+                {item.organization}
+                <span>{item.location}</span>
+              </p>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
       </div>
     </section>
 
-    <section id="Teach">
-      <div>
-        <h2 class="mb-4 text-center font-bold text-2xl">Teaching Assistant</h2>
+    <section class="timeline-section" aria-labelledby="education-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Academic background</p>
+        <h2 id="education-heading">Education</h2>
+      </div>
 
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">System Security</h3>
-          <p><strong>Institution:</strong> Universität Hamburg, Hamburg</p>
-          <p><strong>Year:</strong> Sep 2024 - Mar 2025</p>
-        </div>
-
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">System Security</h3>
-          <p><strong>Institution:</strong> Universität des Saarlandes, Saarbrücken</p>
-          <p><strong>Year:</strong> Sep 2023 - Mar 2024</p>
-        </div>
-
-        <div class="experience p-5 rounded-lg shadow-md mb-5 bg-skin-card">
-          <h3 class="font-bold text-xl mb-2">Operating System</h3>
-          <p><strong>Institution:</strong> University of Virginia, Charlottesville</p>
-          <p><strong>Year:</strong> Sep 2021 - Mar 2022</p>
-        </div>
+      <div class="timeline compact">
+        {
+          educationItems.map(item => (
+            <article class="timeline-card">
+              <p class="period">{item.period}</p>
+              <h3>{item.degree}</h3>
+              <p class="organization">
+                {item.institution}
+                <span>{item.location}</span>
+              </p>
+            </article>
+          ))
+        }
       </div>
     </section>
   </main>
@@ -67,12 +117,67 @@ import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 <style>
   #main-content {
-    max-width: 768px; /* Tailwind equivalent: max-w-3xl */
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @apply mx-auto w-full max-w-5xl px-4 pb-16;
   }
 
+  .page-hero {
+    @apply mx-auto max-w-none px-0 pb-10 pt-8;
+  }
 
+  .page-hero h1 {
+    @apply text-5xl font-bold tracking-[-0.07em] sm:text-6xl;
+  }
+
+  .page-hero p:last-child {
+    @apply mt-5 max-w-2xl text-lg leading-8 text-skin-base/75;
+  }
+
+  .eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
+  }
+
+  .timeline-section {
+    @apply mx-auto max-w-none px-0 py-8;
+  }
+
+  .section-heading {
+    @apply mb-6;
+  }
+
+  .section-heading h2 {
+    @apply text-3xl font-bold tracking-[-0.04em];
+  }
+
+  .timeline {
+    @apply relative grid gap-4 border-l border-skin-line pl-5;
+  }
+
+  .timeline-card {
+    @apply relative rounded-[1.25rem] border border-skin-line bg-skin-fill/85 p-5 shadow-[0_16px_48px_rgba(15,23,42,0.07)] backdrop-blur;
+  }
+
+  .timeline-card::before {
+    content: "";
+    @apply absolute -left-[1.75rem] top-7 h-3 w-3 rounded-full border-2 border-skin-fill bg-skin-accent;
+  }
+
+  .period {
+    @apply mb-3 inline-flex rounded-full bg-skin-card/60 px-3 py-1 text-xs font-semibold text-skin-accent;
+  }
+
+  .timeline-card h3 {
+    @apply text-xl font-semibold tracking-[-0.03em];
+  }
+
+  .organization {
+    @apply mt-2 font-medium text-skin-base/80;
+  }
+
+  .organization span {
+    @apply ml-2 text-sm font-normal text-skin-base/55;
+  }
+
+  .timeline-card p:last-child {
+    @apply mt-4 leading-7 text-skin-base/70;
+  }
 </style>

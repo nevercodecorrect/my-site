@@ -1,361 +1,230 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
 import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import { SITE, SOCIALS } from "@config";
+import { SOCIALS } from "@config";
 
-const posts = await getCollection("blog");
+const focusAreas = [
+  "System security",
+  "Firmware analysis",
+  "Fuzzing",
+  "Web security",
+] as const;
 
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const workAreas = [
+  {
+    title: "Business logic security",
+    text: "Studying how sanitization assumptions, policy checks, and application semantics fail in real web systems.",
+  },
+  {
+    title: "Evasive Python threats",
+    text: "Exploring resilient path analysis techniques for uncovering malicious behavior hidden in Python-based software.",
+  },
+  {
+    title: "Firmware and UEFI fuzzing",
+    text: "Finding bugs below the OS in firmware, bootloaders, system management mode, and hardware-adjacent stacks.",
+  },
+  {
+    title: "Scalable vulnerability discovery",
+    text: "Building automated systems that make deep security testing practical across large, real-world codebases.",
+  },
+] as const;
+
+const newsItems = [
+  {
+    date: "2026",
+    text: "PyFEX accepted to CCS 2026.",
+  },
+  {
+    date: "2026",
+    text: "Anota accepted to NDSS 2026.",
+  },
+  {
+    date: "2026",
+    text: "SmuFuzz accepted to IEEE Symposium on Security and Privacy 2026.",
+  },
+  {
+    date: "2025",
+    text: "Two papers accepted to NDSS 2025 on video acceleration stacks and bootloader memory safety.",
+  },
+] as const;
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
-<Layout>
-  <Header />
+<Layout title="Meng Wang | System and Firmware Security">
+  <Header activeNav="home" />
   <main id="main-content">
-    <section id="hero">
-      <h1>About me:</h1>
+    <section id="hero" class="site-section">
+      <div class="hero-copy">
+        <p class="eyebrow">System Security / Firmware / Web Security</p>
+        <h1>Meng Wang</h1>
+        <p class="hero-summary">
+          Ph.D. student at
+          <a class="text-link" href="https://cispa.de/en">
+            CISPA Helmholtz Center for Information Security
+          </a>
+          advised by
+          <a class="text-link" href="https://ali-abbasi.info/">
+            Dr. Ali Abbasi
+          </a>. My work focuses on system and firmware security. Previously, I
+          worked with AWS Proactive Security on a web vulnerability scanner for
+          AWS-owned websites.
+        </p>
 
-      <p>
-        Hello! I am Meng Wang, a Ph.D. student in
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://cispa.de/en"
-        >
-          CISPA
-        </LinkButton>
-        Helmholtz Center for Information Security. I am currently supervised by
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://ali-abbasi.info/"
-        >
-          Dr. Ali Abbasi
-        </LinkButton>
-        with a focus on system/firmware security. Previously, I was part of AWS Proactive Security, where I worked on a web vulnerability scanner to assess all AWS-owned websites.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
+        <div class="focus-list" aria-label="Research focus areas">
+          {focusAreas.map(area => <span>{area}</span>)}
+        </div>
+
+        {
+          socialCount > 0 && (
+            <div class="social-wrapper">
+              <span>Profiles</span>
+              <Socials />
+            </div>
+          )
+        }
+      </div>
     </section>
 
-    <Hr />
-    <section id="Publications">
-      <h1 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">
-        Publications
-      </h1>
-      <body>
+    <section id="research" class="site-section split-section">
+      <div class="section-heading">
+        <h2>What I Work On</h2>
+      </div>
 
-          <div
-            class="publication"
-            style="
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 20px;"
-          >
-            <h2 style="font-weight: bold;">
-              <a href="#" target="_blank"
-                >[NDSS 26] Anota: Identifying Business Logic Vulnerabilities via Annotation-Based Sanitization</a>
-            </h2>
-            <p>
-              <strong>Authors:</strong> <span
-                style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
-                >Meng Wang</span
-              >, Philipp G&ouml;rz, Joschua Schilling, Keno Hassler, Liwei Guo, Thorsten Holz, Ali Abbasi
-            </p>
-
-            <p>
-              <strong>Conference:</strong> Network and Distributed System Security
-              (NDSS) Symposium
-            </p>
-          </div>
-
-        
-          <div
-            class="publication"
-            style="
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 20px;"
-          >
-            <h2 style="font-weight: bold;">
-              <a href="https://sp2026.ieee-security.org/" target="_blank"
-                >[SP 26] SmuFuzz: Enable Deep System Management Mode Fuzzing in Fully Featured UEFI Runtime Environment</a>
-            </h2>
-            <p>
-              <strong>Authors:</strong> Jianqiang Wang, Yi Xiang, 
-              <span style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;">
-              Meng Wang</span>, Qinying Wang, Ali Abbasi, Thorsten Holz
-            </p>
-
-            <p>
-              <strong>Conference:</strong> IEEE Symposium on Security and Privacy
-            </p>
-          </div>
-
-          <div
-            class="publication"
-            style="
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 20px;"
-          >
-            <h2 style="font-weight: bold;">
-              <a href="https://www.ndss-symposium.org/wp-content/uploads/2025-526-paper.pdf" target="_blank"
-                >[NDSS 25] TWINFUZZ: Differential Testing of Video Hardware Acceleration Stacks</a>
-            </h2>
-            <p>
-              <strong>Authors:</strong> Matteo Leonelli, Addison Crump, <span
-              style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
-              >Meng Wang</span
-            >, Florian Bauckholt, Keno Hassler, Ali Abbasi, Thorsten Holz
-            </p>
-
-            <p>
-              <strong>Conference:</strong> Network and Distributed System Security
-              (NDSS) Symposium
-            </p>
-          </div>
-
-
-          <div
-            class="publication"
-            style="
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 20px;"
-          >
-            <h2 style="font-weight: bold;">
-              <a href="https://www.ndss-symposium.org/wp-content/uploads/2025-330-paper.pdf" target="_blank"
-                >[NDSS 25] A Comprehensive Memory Safety Analysis of Bootloaders</a>
-            </h2>
-            <p>
-              <strong>Authors:</strong> Jianqiang Wang, <span
-                style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
-                >Meng Wang</span
-              >, Qinying Wang, Nils Langius, Li Shi, Ali Abbasi, Thorsten Holz
-            </p>
-
-            <p>
-              <strong>Conference:</strong> Network and Distributed System Security
-              (NDSS) Symposium
-            </p>
-          </div>
-
-          <div
-            class="publication"
-            style="
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                margin-bottom: 20px;"
-          >
-            <h2 style="font-weight: bold;">
-              <a
-                href="https://dl.acm.org/doi/pdf/10.1145/3460120.3484577"
-                target="_blank"
-                >[CCS 21] Spinner: Automated Dynamic Command Subsystem
-                Perturbation</a>
-            </h2>
-            <p>
-              <strong>Authors:</strong>
-              <span
-                style="background-color: lightgray; color: black; padding: 2px 5px; border-radius: 5px;"
-                >Meng Wang</span
-              >, Chijung Jung, Ali Ahad, Yonghwi Kwon
-            </p>
-            <p>
-              <strong>Conference:</strong> Proceedings of the 2021 ACM SIGSAC Conference
-              on Computer and Communications Security
-            </p>
-
-      </body>
+      <div class="research-grid">
+        {
+          workAreas.map(item => (
+            <article class="research-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
     </section>
-    
-    
-    <Hr />
-    <section id="Education">
-      <h1 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">
-        Education
-      </h1>
 
-      <div class="education" style="
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;">
-            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Ph.D. in Computer Science</h3>
-            <p><strong>CISPA Helmholtz Center for Information Security</p>
-            <p><strong>Year:</strong> 2023 - now</p>
-        </div>
-        <div class="education" style="
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;">
-            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">M.S. in Computer Science</h3>
-            <p><strong> University of Virginia</p>
-            <p><strong>Year:</strong> 2019 - 2022</p>
-        </div>
+    <section id="news" class="site-section split-section">
+      <div class="section-heading">
+        <p class="eyebrow">Updates</p>
+        <h2>News</h2>
+      </div>
 
-        <div class="education" style="
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;">
-            <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">B.E. in Network Security</h3>
-            <p><strong> Dalian University of Technology</p>
-            <p><strong>Year:</strong> 2015 - 2019</p>
-        </div>
-
-    </section>  
-    
-    
-    
-    <Hr />
-
-
-    <!-- {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < SITE.postPerIndex && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
-          </ul>
-        </section>
-      )
-    }
-
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div> -->
+      <ol class="news-list">
+        {
+          newsItems.map(item => (
+            <li>
+              <time>{item.date}</time>
+              <span>{item.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
   </main>
 
   <Footer />
 </Layout>
 
 <style>
-.container, .publication, .education {
-  /* background: white; */
-  /* color: black; Ensures default text color */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
+  #main-content {
+    @apply mx-auto w-full max-w-5xl px-4 pb-16;
+  }
 
-/* Dark Mode Styles */
-.dark-mode .container, 
-.dark-mode .publication, 
-.dark-mode .education {
-  background: #1e1e1e;
-  color: white; /* Ensures text is readable */
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-}
+  .site-section {
+    @apply mx-auto max-w-none px-0;
+  }
 
-/* Ensure links are visible in dark mode */
-.dark-mode a {
-  color: #4da6ff; /* Light blue for contrast */
-}
+  .eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
+  }
 
-.dark-mode strong {
-  color: #ffcc66; /* A soft yellow for emphasis */
-}
+  .text-link {
+    @apply font-semibold underline decoration-2 underline-offset-4 transition-colors hover:text-skin-accent;
+    text-decoration-color: rgba(var(--color-accent), 0.45);
+  }
 
-/* Style for author highlight */
-.dark-mode .highlight-author {
-  background-color: #444; /* Dark gray */
-  color: white;
-}
-  /* ===== Hero Section ===== */
   #hero {
-    @apply pb-6 pt-8;
+    @apply pb-8 pt-10 sm:pb-10 sm:pt-16;
   }
+
+  .hero-copy {
+    @apply relative rounded-[2rem] border border-skin-line/70 bg-skin-fill/80 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur sm:p-10;
+  }
+
+  .hero-copy::before {
+    content: "";
+    @apply absolute left-6 top-0 h-1 w-28 rounded-full bg-skin-accent sm:left-10;
+  }
+
   #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+    @apply mb-5 text-5xl font-bold leading-none tracking-[-0.08em] sm:text-7xl;
   }
-  #hero .rss-link {
+
+  .hero-summary {
+    @apply max-w-3xl text-base leading-8 sm:text-lg;
+  }
+
+  .focus-list {
+    @apply mt-7 flex flex-wrap gap-2;
+  }
+
+  .focus-list span {
+    @apply rounded-full border border-skin-line bg-skin-card/35 px-3 py-1 text-sm;
+  }
+
+  .social-wrapper {
+    @apply mt-8 flex flex-col gap-2 text-sm text-skin-base/75 sm:flex-row sm:items-center;
+  }
+
+  .split-section {
+    @apply py-10;
+  }
+
+  .section-heading {
     @apply mb-6;
   }
-  #hero .rss-icon {
-    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
-  }
-  #hero p {
-    @apply my-2;
-  }
-  .social-wrapper {
-    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
-  }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
+
+  .section-heading h2 {
+    @apply text-3xl font-bold tracking-[-0.05em] sm:text-4xl;
   }
 
-  /* ===== Featured & Recent Posts Sections ===== */
-  #featured,
-  #Publications,
-  #recent-posts {
-    @apply pb-6 pt-12;
+  .research-grid {
+    @apply grid gap-4 sm:grid-cols-2;
   }
-  #featured h2,
-  #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+
+  @media (min-width: 1024px) {
+    .research-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
-  .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+
+  .research-card {
+    @apply rounded-[1.25rem] border border-skin-line bg-skin-card/30 p-5;
+  }
+
+  .research-card h3 {
+    @apply text-lg font-semibold leading-tight tracking-[-0.03em];
+  }
+
+  .research-card p {
+    @apply mt-4 text-sm leading-7 text-skin-base/70;
+  }
+
+  .news-list {
+    @apply grid gap-3;
+  }
+
+  .news-list li {
+    @apply grid gap-3 rounded-[1rem] border border-skin-line bg-skin-fill/75 p-4 shadow-[0_10px_30px_rgba(15,23,42,0.05)] sm:grid-cols-[5rem_minmax(0,1fr)] sm:items-center;
+  }
+
+  .news-list time {
+    @apply text-sm font-bold text-skin-accent;
+  }
+
+  .news-list span {
+    @apply leading-7 text-skin-base/75;
   }
 </style>

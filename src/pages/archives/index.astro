@@ -9,7 +9,7 @@ import Main from "@layouts/Main.astro";
 import getPostsByGroupCondition from "@utils/getPostsByGroupCondition";
 
 // Redirect to 404 page if `showArchives` config is false
-if (!SITE.showArchives) {
+if (!SITE.showArchives || !SITE.showWriting) {
   return Astro.redirect("/404");
 }
 
@@ -31,9 +31,12 @@ const MonthMap: Record<string, string> = {
 };
 ---
 
-<Layout title={`Archives | ${SITE.title}`}>
+<Layout title={`Writing Archive | ${SITE.title}`}>
   <Header activeNav="archives" />
-  <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
+  <Main
+    pageTitle="Writing Archive"
+    pageDesc="Posts grouped by publication date."
+  >
     {
       Object.entries(
         getPostsByGroupCondition(posts, post =>

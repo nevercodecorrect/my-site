@@ -6,6 +6,8 @@ import { getCollection } from "astro:content";
 import getSortedPosts from "@utils/getSortedPosts";
 
 export const getStaticPaths = (async ({ paginate }) => {
+  if (!SITE.showWriting) return [];
+
   const posts = await getCollection("blog", ({ data }) => !data.draft);
   return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
 }) satisfies GetStaticPaths;
