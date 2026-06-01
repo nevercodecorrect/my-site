@@ -6,6 +6,24 @@ import Layout from "@layouts/Layout.astro";
 
 const publications = [
   {
+    venue: "OSDI '26",
+    title:
+      "μUSB: Practical and Safe USB Driver Reuse for Arm TrustZone",
+    href: "https://www.usenix.org/conference/osdi26/presentation/zhang-xuankai",
+    conference:
+      "USENIX Symposium on Operating Systems Design and Implementation",
+    authors: [
+      "Xuankai Zhang",
+      "Sijin Li",
+      "Pei Meng",
+      "Meng Wang",
+      "Yongzhao Zhang",
+      "Ting Chen",
+      "Xiaosong Zhang",
+      "Liwei Guo",
+    ],
+  },
+  {
     venue: "CCS '26",
     title:
       "PyFEX: Uncovering Evasive Python-based Threats via Resilient and Exhaustive Path Exploration",
@@ -91,7 +109,7 @@ const publications = [
       "ACM SIGSAC Conference on Computer and Communications Security",
     authors: ["Meng Wang", "Chijung Jung", "Ali Ahad", "Yonghwi Kwon"],
   },
-] as const;
+];
 ---
 
 <Layout title="Publications | Meng Wang">
