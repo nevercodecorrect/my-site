@@ -32,16 +32,16 @@ const activeNav = frontmatter.activeNav ?? inferredActiveNav;
   <Header activeNav={activeNav} />
   <Breadcrumbs />
   <main id="main-content">
-    <section id="about" class="prose mb-28 max-w-4xl prose-img:border-0">
-      <p class="page-kicker">Meng Wang</p>
-      <h1 class="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">
-        {frontmatter.title}
-      </h1>
+    <section class="page-hero">
+      <p class="eyebrow">Meng Wang</p>
+      <h1>{frontmatter.title}</h1>
       {
         frontmatter.description && (
-          <p class="lead not-italic">{frontmatter.description}</p>
+          <p class="page-lead not-italic">{frontmatter.description}</p>
         )
       }
+    </section>
+    <section id="about" class="prose mb-28 max-w-none prose-img:border-0">
       <slot />
     </section>
   </main>
@@ -53,7 +53,10 @@ const activeNav = frontmatter.activeNav ?? inferredActiveNav;
     @apply mx-auto w-full max-w-5xl px-4;
   }
 
-  .page-kicker {
-    @apply !mb-2 !text-xs !font-semibold uppercase !tracking-[0.28em] !text-skin-accent;
+  /* Fill the frame and left-align the prose so it lines up with the header
+     logo and breadcrumb, matching the other pages. Overrides both the
+     global `section { mx-auto px-4 }` rule and prose's default max-width. */
+  #about {
+    @apply mx-0 max-w-none px-0;
   }
 </style>

@@ -6,7 +6,6 @@ activeNav: "about"
 
 <figure>
   <img src="/assets/dev.svg" class="mx-auto max-w-xl" alt="Illustration of software systems and code interfaces">
-  <figcaption>Research at the boundary of software systems, automation, and security analysis.</figcaption>
 </figure>
 
 ## Research Interests

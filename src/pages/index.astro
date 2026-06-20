@@ -15,7 +15,7 @@ const focusAreas = [
 const workAreas = [
   {
     title: "Program analysis tools for hard-to-detect threats",
-    text: "Uncovering evasive threats and hard-to-find business logic vulnerabilities",
+    text: "Uncovering evasive threats and hard-to-find business logic vulnerabilities.",
   },
   {
     title: "Low-level firmware security",
@@ -28,17 +28,11 @@ const workAreas = [
 ] as const;
 
 const newsItems = [
+  { date: "2026", text: "PyFEX accepted to CCS 2026." },
+  { date: "2026", text: "Anota accepted to NDSS 2026." },
   {
     date: "2026",
-    text: "PyFEX accepted to CCS 2026.",
-  },
-  {
-    date: "2026",
-    text: "Anota accepted to NDSS 2026.",
-  },
-  {
-    date: "2026",
-    text: "SmuFuzz accepted to IEEE Symposium on Security and Privacy 2026.",
+    text: "SmuFuzz accepted to IEEE S&P 2026.",
   },
   {
     date: "2025",
@@ -46,76 +40,80 @@ const newsItems = [
   },
 ] as const;
 
+const newsByYear = Object.entries(
+  newsItems.reduce(
+    (acc, item) => {
+      (acc[item.date] ||= []).push(item.text);
+      return acc;
+    },
+    {} as Record<string, string[]>
+  )
+).sort((a, b) => Number(b[0]) - Number(a[0]));
+
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout title="Meng Wang | System and Firmware Security">
   <Header activeNav="home" />
   <main id="main-content">
-    <section id="hero" class="site-section">
-      <div class="hero-copy">
-        <h1>Meng Wang</h1>
-        <p class="hero-summary">
-          Ph.D. student at
-          <a class="text-link" href="https://cispa.de/en">
-            CISPA Helmholtz Center for Information Security
-          </a>
-          advised by
-          <a class="text-link" href="https://ali-abbasi.info/">
-            Dr. Ali Abbasi
-          </a>. My work focuses on system and firmware security. Previously, I
-          worked with AWS Proactive Security on a web vulnerability scanner for
-          AWS-owned websites.
-        </p>
+    <section class="page-hero">
+      <p class="eyebrow">System &amp; firmware security</p>
+      <h1>Meng Wang</h1>
+      <p class="page-lead">
+        Ph.D. student at
+        <a class="text-link" href="https://cispa.de/en">
+          CISPA Helmholtz Center for Information Security
+        </a>
+        advised by
+        <a class="text-link" href="https://ali-abbasi.info/">Dr. Ali Abbasi</a>.
+        My work focuses on system and firmware security. Previously, I worked
+        with AWS Proactive Security on a web vulnerability scanner for AWS-owned
+        websites.
+      </p>
 
-        <div class="focus-list" aria-label="Research focus areas">
-          {focusAreas.map(area => <span>{area}</span>)}
-        </div>
+      <p class="hero-focus">{focusAreas.join("  ·  ")}</p>
 
-        {
-          socialCount > 0 && (
-            <div class="social-wrapper">
-              <span>Profiles</span>
-              <Socials />
-            </div>
-          )
-        }
-      </div>
+      {
+        socialCount > 0 && (
+          <div class="hero-profiles">
+            <span>Profiles</span>
+            <Socials />
+          </div>
+        )
+      }
     </section>
 
-    <section id="research" class="site-section split-section">
-      <div class="section-heading">
-        <h2>What I Work On</h2>
-      </div>
-
+    <section class="content-section" aria-labelledby="research-heading">
+      <h2 id="research-heading" class="section-title">Research</h2>
       <div class="research-grid">
         {
           workAreas.map(item => (
-            <article class="research-card">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+            <article class="research-item">
+              <span class="research-bar" />
+              <h3 class="research-title">{item.title}</h3>
+              <p class="research-text">{item.text}</p>
             </article>
           ))
         }
       </div>
     </section>
 
-    <section id="news" class="site-section split-section">
-      <div class="section-heading">
-        <p class="eyebrow">Updates</p>
-        <h2>News</h2>
-      </div>
-
-      <ol class="news-list">
+    <section class="content-section" aria-labelledby="news-heading">
+      <h2 id="news-heading" class="section-title">News</h2>
+      <div class="news-list">
         {
-          newsItems.map(item => (
-            <li>
-              <time>{item.date}</time>
-              <span>{item.text}</span>
-            </li>
+          newsByYear.map(([year, items]) => (
+            <div class="news-group">
+              <time class="news-year">{year}</time>
+              <ul class="news-items">
+                {items.map(text => (
+                  <li>{text}</li>
+                ))}
+              </ul>
+            </div>
           ))
         }
-      </ol>
+      </div>
     </section>
   </main>
 
@@ -127,99 +125,55 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply mx-auto w-full max-w-5xl px-4 pb-16;
   }
 
-  .site-section {
-    @apply mx-auto max-w-none px-0;
+  .hero-focus {
+    @apply mt-6 text-sm font-medium text-skin-accent;
   }
 
-  .eyebrow {
-    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
+  .hero-profiles {
+    @apply mt-8 flex items-center gap-3 text-sm text-skin-base/70;
   }
 
-  .text-link {
-    @apply font-semibold underline decoration-2 underline-offset-4 transition-colors hover:text-skin-accent;
-    text-decoration-color: rgba(var(--color-accent), 0.45);
-  }
-
-  #hero {
-    @apply pb-8 pt-10 sm:pb-10 sm:pt-16;
-  }
-
-  .hero-copy {
-    @apply relative rounded-lg border border-skin-line bg-skin-fill p-6 shadow-[0_8px_24px_rgba(15,23,42,0.04)] sm:p-10;
-  }
-
-  .hero-copy::before {
-    content: "";
-    @apply absolute left-6 top-0 h-1 w-28 rounded-full bg-skin-accent sm:left-10;
-  }
-
-  #hero h1 {
-    @apply mb-5 text-5xl font-bold leading-none tracking-[-0.03em] sm:text-7xl;
-  }
-
-  .hero-summary {
-    @apply max-w-3xl text-base leading-8 sm:text-lg;
-  }
-
-  .focus-list {
-    @apply mt-7 flex flex-wrap gap-2;
-  }
-
-  .focus-list span {
-    @apply rounded-md border border-skin-line bg-skin-card/45 px-3 py-1 text-sm;
-  }
-
-  .social-wrapper {
-    @apply mt-8 flex flex-col gap-2 text-sm text-skin-base/75 sm:flex-row sm:items-center;
-  }
-
-  .split-section {
-    @apply py-10;
-  }
-
-  .section-heading {
-    @apply mb-6;
-  }
-
-  .section-heading h2 {
-    @apply text-3xl font-bold tracking-[-0.05em] sm:text-4xl;
-  }
-
+  /* Research — boxless columns, each topped with a small accent bar. */
   .research-grid {
-    @apply grid gap-4 sm:grid-cols-2;
+    @apply grid gap-x-8 gap-y-9;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .research-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  .research-card {
-    @apply rounded-lg border border-skin-line bg-skin-card/35 p-5;
+  .research-bar {
+    @apply mb-4 block h-1 w-10 rounded-full bg-skin-accent;
   }
 
-  .research-card h3 {
-    @apply text-lg font-semibold leading-tight tracking-[-0.03em];
+  .research-title {
+    @apply font-sans text-base font-semibold leading-snug tracking-[-0.01em];
   }
 
-  .research-card p {
-    @apply mt-4 text-sm leading-7 text-skin-base/70;
+  .research-text {
+    @apply mt-2 font-sans text-sm leading-7 text-skin-base/75;
   }
 
+  /* News — grouped by year, year as a bold accent label, no dividers. */
   .news-list {
-    @apply grid gap-3;
+    @apply grid gap-7;
   }
 
-  .news-list li {
-    @apply grid gap-3 rounded-lg border border-skin-line bg-skin-fill p-4 shadow-[0_6px_18px_rgba(15,23,42,0.035)] sm:grid-cols-[5rem_minmax(0,1fr)] sm:items-center;
+  .news-group {
+    @apply flex flex-col gap-x-6 gap-y-2 sm:flex-row;
   }
 
-  .news-list time {
-    @apply text-sm font-bold text-skin-accent;
+  .news-year {
+    @apply shrink-0 text-lg font-semibold tabular-nums text-skin-accent sm:w-16;
   }
 
-  .news-list span {
-    @apply leading-7 text-skin-base/75;
+  .news-items {
+    @apply grid gap-2.5;
+  }
+
+  .news-items li {
+    @apply font-sans leading-7 text-skin-base/85;
   }
 </style>

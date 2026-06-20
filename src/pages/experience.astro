@@ -4,6 +4,9 @@ import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import Layout from "@layouts/Layout.astro";
 
+// Render hyphenated date ranges with a proper en dash.
+const dateRange = (s: string) => s.replace(/\s*-\s*/g, " – ");
+
 const workItems = [
   {
     role: "Security Engineer",
@@ -51,6 +54,15 @@ const educationItems = [
     period: "2015 - 2019",
   },
 ] as const;
+
+// Temporarily hidden — program-committee results are not public yet.
+// Uncomment this and the "Services" section below to re-enable.
+// const serviceItems = [
+//   {
+//     role: "Program Committee",
+//     venues: ["AsiaCCS 2027", "USENIX Security 2027"],
+//   },
+// ] as const;
 ---
 
 <Layout title="Experience | Meng Wang">
@@ -60,51 +72,67 @@ const educationItems = [
     <section class="page-hero">
       <p class="eyebrow">Academic and industry experience</p>
       <h1>Experience</h1>
-      <p>
-        Research and engineering work across system security and web security,
-        with academic training in computer science and network security.
-      </p>
     </section>
 
-    <section class="timeline-section" aria-labelledby="work-heading">
-      <div class="section-heading">
-        <p class="eyebrow">Research / Engineering</p>
-        <h2 id="work-heading">Work</h2>
-      </div>
+    {
+      /* Temporarily hidden — program-committee results are not public yet.
+       Uncomment this and the `serviceItems` array above to re-enable.
 
-      <div class="timeline">
+    <section class="content-section" aria-labelledby="service-heading">
+      <h2 id="service-heading" class="section-title">Services</h2>
+      <div class="entry-list">
+        {
+          serviceItems.map(item => (
+            <article class="entry">
+              <div class="entry-row">
+                <p class="entry-main">
+                  <span class="entry-title">{item.role}</span>
+                </p>
+                <p class="entry-meta">{item.venues.join(" · ")}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    */
+    }
+
+    <section class="content-section" aria-labelledby="work-heading">
+      <h2 id="work-heading" class="section-title">Work</h2>
+      <div class="entry-list">
         {
           workItems.map(item => (
-            <article class="timeline-card">
-              <p class="period">{item.period}</p>
-              <h3>{item.role}</h3>
-              <p class="organization">
-                {item.organization}
-                <span>{item.location}</span>
-              </p>
-              <p>{item.description}</p>
+            <article class="entry">
+              <div class="entry-row">
+                <p class="entry-main">
+                  <span class="entry-title">{item.role}</span>
+                  <span class="entry-org">{item.organization}</span>
+                  <span class="entry-loc">{item.location}</span>
+                </p>
+                <p class="entry-meta">{dateRange(item.period)}</p>
+              </div>
+              <p class="entry-desc">{item.description}</p>
             </article>
           ))
         }
       </div>
     </section>
 
-    <section class="timeline-section" aria-labelledby="education-heading">
-      <div class="section-heading">
-        <p class="eyebrow">Academic background</p>
-        <h2 id="education-heading">Education</h2>
-      </div>
-
-      <div class="timeline compact">
+    <section class="content-section" aria-labelledby="education-heading">
+      <h2 id="education-heading" class="section-title">Education</h2>
+      <div class="entry-list">
         {
           educationItems.map(item => (
-            <article class="timeline-card">
-              <p class="period">{item.period}</p>
-              <h3>{item.degree}</h3>
-              <p class="organization">
-                {item.institution}
-                <span>{item.location}</span>
-              </p>
+            <article class="entry">
+              <div class="entry-row">
+                <p class="entry-main">
+                  <span class="entry-title">{item.degree}</span>
+                  <span class="entry-org">{item.institution}</span>
+                  <span class="entry-loc">{item.location}</span>
+                </p>
+                <p class="entry-meta">{dateRange(item.period)}</p>
+              </div>
             </article>
           ))
         }
@@ -118,66 +146,5 @@ const educationItems = [
 <style>
   #main-content {
     @apply mx-auto w-full max-w-5xl px-4 pb-16;
-  }
-
-  .page-hero {
-    @apply mx-auto max-w-none px-0 pb-10 pt-8;
-  }
-
-  .page-hero h1 {
-    @apply text-5xl font-bold tracking-[-0.07em] sm:text-6xl;
-  }
-
-  .page-hero p:last-child {
-    @apply mt-5 max-w-2xl text-lg leading-8 text-skin-base/75;
-  }
-
-  .eyebrow {
-    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
-  }
-
-  .timeline-section {
-    @apply mx-auto max-w-none px-0 py-8;
-  }
-
-  .section-heading {
-    @apply mb-6;
-  }
-
-  .section-heading h2 {
-    @apply text-3xl font-bold tracking-[-0.04em];
-  }
-
-  .timeline {
-    @apply relative grid gap-4 border-l border-skin-line pl-5;
-  }
-
-  .timeline-card {
-    @apply relative rounded-[1.25rem] border border-skin-line bg-skin-fill/85 p-5 shadow-[0_16px_48px_rgba(15,23,42,0.07)] backdrop-blur;
-  }
-
-  .timeline-card::before {
-    content: "";
-    @apply absolute -left-[1.75rem] top-7 h-3 w-3 rounded-full border-2 border-skin-fill bg-skin-accent;
-  }
-
-  .period {
-    @apply mb-3 inline-flex rounded-full bg-skin-card/60 px-3 py-1 text-xs font-semibold text-skin-accent;
-  }
-
-  .timeline-card h3 {
-    @apply text-xl font-semibold tracking-[-0.03em];
-  }
-
-  .organization {
-    @apply mt-2 font-medium text-skin-base/80;
-  }
-
-  .organization span {
-    @apply ml-2 text-sm font-normal text-skin-base/55;
-  }
-
-  .timeline-card p:last-child {
-    @apply mt-4 leading-7 text-skin-base/70;
   }
 </style>

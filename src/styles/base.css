@@ -33,7 +33,7 @@
   }
   section,
   footer {
-    @apply mx-auto max-w-3xl px-4;
+    @apply mx-auto max-w-5xl px-4;
   }
   a {
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
@@ -46,6 +46,13 @@
   }
   .prose {
     @apply prose-headings:!mb-3 prose-headings:!text-skin-base prose-h3:italic prose-p:!text-skin-base prose-a:!text-skin-base prose-a:!decoration-dashed prose-a:underline-offset-8 hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent/50 prose-blockquote:opacity-80 prose-figcaption:!text-skin-base prose-figcaption:opacity-70 prose-strong:!text-skin-base prose-code:rounded prose-code:bg-skin-card/75 prose-code:p-1 prose-code:before:!content-none prose-code:after:!content-none prose-ol:!text-skin-base prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-accent prose-table:text-skin-base prose-th:border prose-th:border-skin-line prose-td:border prose-td:border-skin-line prose-img:!my-2 prose-img:mx-auto prose-img:border-2 prose-img:border-skin-line prose-hr:!border-skin-line;
+  }
+  .prose {
+    @apply font-sans;
+  }
+  .prose code,
+  .prose pre {
+    @apply font-mono;
   }
   .prose a {
     @apply break-words hover:!text-skin-accent;
@@ -123,5 +130,63 @@
   }
   .focus-outline {
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
+  }
+
+  /* ===== Academic page system =====
+     Shared across every top-level page so the site reads as one identity:
+     a full-width hero, plain section titles, and a boxless "entry list"
+     (hairline-divided rows, bold title on the left, accent tabular meta
+     right-aligned). */
+  .page-hero {
+    @apply mx-auto max-w-none px-0 pb-9 pt-8;
+  }
+  .page-hero h1 {
+    @apply text-4xl font-bold tracking-[-0.04em] sm:text-5xl;
+  }
+  .page-lead {
+    @apply mt-5 max-w-none font-sans text-lg leading-8 text-skin-base/85;
+  }
+  .eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
+  }
+
+  .content-section {
+    @apply mx-auto max-w-none px-0 py-7;
+  }
+  .section-title {
+    @apply mb-3 text-2xl font-bold tracking-[-0.03em];
+  }
+
+  .entry-list {
+    @apply divide-y divide-skin-line border-y border-skin-line;
+  }
+  .entry {
+    @apply py-4;
+  }
+  .entry-row {
+    @apply flex flex-col gap-x-6 gap-y-1 sm:flex-row sm:items-baseline sm:justify-between;
+  }
+  .entry-main {
+    @apply flex flex-wrap items-baseline gap-x-3 gap-y-0.5;
+  }
+  .entry-title {
+    @apply font-sans text-lg font-semibold tracking-[-0.01em];
+  }
+  .entry-org {
+    @apply font-sans font-medium text-skin-base/85;
+  }
+  .entry-loc {
+    @apply font-sans text-sm text-skin-base/65;
+  }
+  .entry-meta {
+    @apply shrink-0 text-sm font-medium tabular-nums text-skin-accent sm:text-right;
+  }
+  .entry-desc {
+    @apply mt-1 font-sans text-sm leading-7 text-skin-base/85;
+  }
+
+  .text-link {
+    @apply font-semibold underline decoration-2 underline-offset-4 transition-colors hover:text-skin-accent;
+    text-decoration-color: rgba(var(--color-accent), 0.45);
   }
 }

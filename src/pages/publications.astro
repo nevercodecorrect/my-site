@@ -7,8 +7,7 @@ import Layout from "@layouts/Layout.astro";
 const publications = [
   {
     venue: "OSDI '26",
-    title:
-      "μUSB: Practical and Safe USB Driver Reuse for Arm TrustZone",
+    title: "μUSB: Practical and Safe USB Driver Reuse for Arm TrustZone",
     href: "https://www.usenix.org/conference/osdi26/presentation/zhang-xuankai",
     conference:
       "USENIX Symposium on Operating Systems Design and Implementation",
@@ -105,8 +104,7 @@ const publications = [
     venue: "CCS '21",
     title: "Spinner: Automated Dynamic Command Subsystem Perturbation",
     href: "https://dl.acm.org/doi/pdf/10.1145/3460120.3484577",
-    conference:
-      "ACM SIGSAC Conference on Computer and Communications Security",
+    conference: "ACM SIGSAC Conference on Computer and Communications Security",
     authors: ["Meng Wang", "Chijung Jung", "Ali Ahad", "Yonghwi Kwon"],
   },
 ];
@@ -119,44 +117,47 @@ const publications = [
     <section class="page-hero">
       <p class="eyebrow">Selected work</p>
       <h1>Publications</h1>
-      <p>
-        Peer-reviewed work on system security, firmware analysis, fuzzing, and
-        vulnerability discovery.
-      </p>
     </section>
 
-    <section class="publication-list" aria-label="Publications">
-      {
-        publications.map(publication => (
-          <article class="publication-card">
-            <div class="venue-badge">{publication.venue}</div>
-            <div class="card-content">
-              <h2>
+    <section class="content-section" aria-label="Publications">
+      <div class="entry-list">
+        {
+          publications.map(publication => (
+            <article class="entry pub">
+              <div class="pub-venue-col">
+                <span class="pub-venue">{publication.venue}</span>
+                <span class="pub-conf">{publication.conference}</span>
+              </div>
+              <div class="pub-body">
                 {publication.href ? (
-                  <a href={publication.href} target="_blank" rel="noreferrer">
+                  <a
+                    class="pub-title"
+                    href={publication.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {publication.title}
                   </a>
                 ) : (
-                  publication.title
+                  <span class="pub-title">{publication.title}</span>
                 )}
-              </h2>
-              <p class="authors">
-                {publication.authors.map((author, index) => (
-                  <>
-                    {author === "Meng Wang" ? (
-                      <strong class="author-self">{author}</strong>
-                    ) : (
-                      <span>{author}</span>
-                    )}
-                    {index < publication.authors.length - 1 && ", "}
-                  </>
-                ))}
-              </p>
-              <p class="conference">{publication.conference}</p>
-            </div>
-          </article>
-        ))
-      }
+                <p class="pub-authors">
+                  {publication.authors.map((author, index) => (
+                    <>
+                      {author === "Meng Wang" ? (
+                        <strong class="author-self">{author}</strong>
+                      ) : (
+                        <span>{author}</span>
+                      )}
+                      {index < publication.authors.length - 1 && ", "}
+                    </>
+                  ))}
+                </p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </section>
   </main>
 
@@ -168,52 +169,38 @@ const publications = [
     @apply mx-auto w-full max-w-5xl px-4 pb-16;
   }
 
-  .page-hero {
-    @apply mx-auto max-w-none px-0 pb-10 pt-8;
+  .pub {
+    @apply grid gap-x-6 gap-y-2;
   }
 
-  .page-hero h1 {
-    @apply text-5xl font-bold tracking-[-0.07em] sm:text-6xl;
+  @media (min-width: 768px) {
+    .pub {
+      grid-template-columns: 12rem minmax(0, 1fr);
+    }
   }
 
-  .page-hero p:last-child {
-    @apply mt-5 max-w-3xl text-lg leading-8 text-skin-base/75;
+  .pub-venue-col {
+    @apply flex flex-col gap-1;
   }
 
-  .eyebrow {
-    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-skin-accent;
+  .pub-venue {
+    @apply text-sm font-semibold tabular-nums text-skin-accent;
   }
 
-  .publication-list {
-    @apply grid gap-4;
+  .pub-conf {
+    @apply font-sans text-xs leading-snug text-skin-base/55;
   }
 
-  .publication-card {
-    @apply grid gap-4 rounded-[1.5rem] border border-skin-line bg-skin-fill/85 p-5 shadow-[0_18px_54px_rgba(15,23,42,0.07)] backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-skin-accent/60 sm:grid-cols-[6rem_minmax(0,1fr)] sm:p-6;
-  }
-
-  .venue-badge {
-    @apply flex h-14 w-24 items-center justify-center rounded-2xl bg-skin-card/60 text-sm font-bold text-skin-accent sm:w-full;
-  }
-
-  .card-content h2 {
-    @apply text-xl font-semibold leading-snug tracking-[-0.03em];
-  }
-
-  .card-content h2 a {
-    @apply decoration-2 underline-offset-4 transition-colors hover:text-skin-accent hover:underline;
+  .pub-title {
+    @apply font-sans text-lg font-semibold leading-snug tracking-[-0.01em] decoration-2 underline-offset-4 transition-colors hover:text-skin-accent hover:underline;
     text-decoration-color: rgba(var(--color-accent), 0.35);
   }
 
-  .authors {
-    @apply mt-4 leading-7 text-skin-base/80;
+  .pub-authors {
+    @apply mt-1.5 font-sans text-sm leading-7 text-skin-base/80;
   }
 
   .author-self {
-    @apply rounded-full bg-skin-accent px-2 py-0.5 font-semibold text-skin-inverted;
-  }
-
-  .conference {
-    @apply mt-3 text-sm font-medium uppercase tracking-[0.16em] text-skin-base/60;
+    @apply font-semibold text-skin-base;
   }
 </style>
