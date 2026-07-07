@@ -64,17 +64,36 @@ const structuredData = {
     <meta name="generator" content={Astro.generator} />
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ2J6BS9LE"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer ?? [];
-
-      function gtag(...args: unknown[]) {
-        window.dataLayer?.push(args);
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-RQ2J6BS9LE"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      // Canonical form: push the `arguments` OBJECT, never a real array.
+      // `is:inline` keeps this verbatim in <head> so esbuild can't rewrite it
+      // into a rest-param array push (which silently breaks gtag.js).
+      function gtag() {
+        dataLayer.push(arguments);
       }
-
       gtag("js", new Date());
-      gtag("config", "G-RQ2J6BS9LE", { anonymize_ip: true });
+      // send_page_view:false so the astro:page-load handler below is the single
+      // source of page_view hits (that event also fires on the initial load,
+      // so we'd otherwise double-count the landing page).
+      gtag("config", "G-RQ2J6BS9LE", {
+        anonymize_ip: true,
+        send_page_view: false,
+      });
+
+      // Fires on the first load AND after every ViewTransitions navigation.
+      // Registered on `document`, which survives head/body swaps.
+      document.addEventListener("astro:page-load", function () {
+        gtag("event", "page_view", {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search,
+        });
+      });
     </script>
 
     <!-- General Meta Tags -->
