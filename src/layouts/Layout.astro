@@ -94,6 +94,18 @@ const structuredData = {
           page_path: location.pathname + location.search,
         });
       });
+
+      // Track which nav tab a visitor clicks. One delegated listener on
+      // `document` survives ViewTransitions swaps; `closest` matches clicks on
+      // the <a> in the header menu (#menu-items a).
+      document.addEventListener("click", function (e) {
+        const link = e.target.closest && e.target.closest("#menu-items a");
+        if (!link) return;
+        gtag("event", "nav_click", {
+          link_text: (link.textContent || "").trim(),
+          link_url: link.getAttribute("href"),
+        });
+      });
     </script>
 
     <!-- General Meta Tags -->
